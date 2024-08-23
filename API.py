@@ -6,8 +6,6 @@ def main():
   
   #connetct to ganache server (usually hosted in 127.0.0.1:7545
   w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:7545'))
-
-  #try to connect 
   if not w3.isConnected():
       print("Not connected to Ganache, try to re-launch the service")
       main()
@@ -19,14 +17,12 @@ def main():
   abi = abi_input  #Connect to the smart contract ABI
   contract_address = address_input #Connect to the smart contract address
 
-  # Create the istance for the contract
   contract = w3.eth.contract(address=contract_address, abi=abi)
-
   account = w3.eth.accounts[0]
   tx_hash = contract.functions.set(123).transact({'from': account})
   w3.eth.wait_for_transaction_receipt(tx_hash)
 
-  ### From there the code must suite tehc ode of your contract.
+  ### From there the code must suite the code of your contract.
   ### We are here working with th example from the tutorial
   # This lines in particulare are going to read the value of the smart contract we have created.
   stored_data = contract.functions.storedData().call()
@@ -34,3 +30,4 @@ def main():
 
 
 main()
+#Follow NE - Neural Episteme for the second part of this tutorial
